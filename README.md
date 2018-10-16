@@ -56,30 +56,30 @@ happens.
 
 | Line                | Expected Result | Actual Result | Were you right? Why? |
 | ------------------- | --------------- | ------------- | -------------------- |
-| `2 + 2`             |                 |               |                      |
-| `5 - 3`             |                 |               |                      |
-| `3 * 6`             |                 |               |                      |
-| `10 / 2`            |                 |               |                      |
-| `5 / 2`             |                 |               |                      |
-| `5.0 / 2`           |                 |               |                      |
-| `“hello” + “world”` |                 |               |                      |
-| `“Hello” - “world”` |                 |               |                      |
-| `3 + “3”`           |                 |               |                      |
-| `typeof “hello”`    |                 |               |                      |
-| `typeof 13`         |                 |               |                      |
-| `typeof true`       |                 |               |                      |
-| `typeof 3 + 5`      |                 |               |                      |
-| `typeof (3 + 5)`    |                 |               |                      |
-| `typeof (3 + “3”)`  |                 |               |                      |
-| `3 == 3`            |                 |               |                      |
-| `3 == 2`            |                 |               |                      |
-| `typeof (3 == 3)`   |                 |               |                      |
-| `3 != 3`            |                 |               |                      |
-| `3 != 2`            |                 |               |                      |
-| `3 == 1 + 2`        |                 |               |                      |
-| `3 == 2 + 2`        |                 |               |                      |
-| `3 < 2 + 2`         |                 |               |                      |
-| `3 > 2 + 2`         |                 |               |                      |
+| `2 + 2`             |        4        |        4      |            yes       |
+| `5 - 3`             |        2        |        2      |            yes       |
+| `3 * 6`             |         18      |       18      |              yes     |
+| `10 / 2`            |        5        |       5       |          yes         |
+| `5 / 2`             |       2.5       |       2.5     |         yes          |
+| `5.0 / 2`           |        2.5      |       2.5     |        yes           |
+| `“hello” + “world”` |   helloworld    |    helloworld |            yes       |
+| `“Hello” - “world”` |    probably something weird             |     NaN          | yes, because you can't subtract strings |
+| `3 + “3”`           |       33        |       33      |yes, because 3 is an int and "3" is a string|
+| `typeof “hello”`    |   string        |       string  |       yes            |
+| `typeof 13`         |       int       |     number    |        kinda         |
+| `typeof true`       |      bool       |    boolean    |        yes           |
+| `typeof 3 + 5`      |       number    |     number5   |        no            |
+| `typeof (3 + 5)`    |      number     |    number     |           yes        |
+| `typeof (3 + “3”)`  |   number3       |     string    |            no        |
+| `3 == 3`            |       true      |      true     |        yes           |
+| `3 == 2`            |          false  |     false     |         yes          |
+| `typeof (3 == 3)`   |     boolean     |    boolean    |        yes           |
+| `3 != 3`            |  false          |      false    |        yes           |
+| `3 != 2`            |      true       |     true      |       yes            |
+| `3 == 1 + 2`        |      true       |    true       |       yes            |
+| `3 == 2 + 2`        |      false      |    false      |        yes           |
+| `3 < 2 + 2`         |     true        |     true      |        true          |
+| `3 > 2 + 2`         |         false   |    false      |         yes          |
 
 ## Task 2
 
@@ -120,10 +120,17 @@ rect(position, 0, 10, 10)
 Run the sketch, and make notes below each of these questions:
 
 1. What happens?
+The little square moves across the page
 2. Why?
+Because of the line position = position + 1 - it adds 1 px to the position every time
 3. What happens if you change 1 to a larger or smaller number?
+Larger number - it moves more quickly
+Negative number - it moves to the left
+Zero - it doesn't move at all
 4. Why?
+Because you change the number of pixels you add to the position variable
 5. What about a negative number?
+It moves the other way
 
 Add this line at the bottom of `draw`:
 
