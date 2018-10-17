@@ -1,3 +1,4 @@
+//this is the code for the excercise, ignore this
 /*var name = 'Karolina';
 var position = 100;
 var moving = true;
@@ -61,6 +62,7 @@ var rock = document.getElementById("rock");
 var paper = document.getElementById('paper');
 var scissors = document.getElementById('scissors');
 
+//game starts
 rock.onclick = function() {
   playerInput = 'rock';
   playerRock++;
@@ -77,84 +79,41 @@ scissors.onclick = function() {
   playGame();
 }
 
-//simpler way to do this:
-/*
-new Array([rock, paper, scissors]).forEach(element => {
-  element.onclick = function(ev) {
-    playerInput = ev.target.innerHTML;
-    playGame();
-  };
-});*/
-
 //game logic
 function playGame(){
-  var computerInputID = Math.floor(Math.random() * 3);
+  
+  assignRandomInput();
+  testThePattern();
+  compareInputs();
+  redefinePattern();
+  resetAllOtherParameters();
+  console.log("Did computer win: " + didComputerWin);
+  console.log("Player rock: " + playerRock);
+  console.log("Player paper: " + playerPaper);
+  console.log("Player scissors: " + playerScissors);
+  console.log("Computer realized the pattern:" + didComputerRealizePattern);
 
-  //computer gets an input according to random number
-  if (computerInputID == 0){
-    computerInput = 'rock';
+}
+
+//if the player choses one option, it sets all other options to zero
+//(so that it would check how many times in the row was the option chosen, not total count)
+function resetAllOtherParameters(){
+  if (playerInput == 'rock'){
+    playerPaper = 0;
+    playerScissors = 0;
   }
-  else if(computerInputID == 1){
-    computerInput = 'paper';
+  else if(playerInput == 'paper'){
+    playerRock = 0;
+    playerScissors = 0;
   }
-  else{
-    computerInput = 'scissors';
+  else if(playerInput == 'scissors'){
+    playerRock = 0;
+    playerPaper = 0;
   }
+}
 
-  //the game checks if player has been chosing single option multiple times in a row
-  //computer is smart and wants to win
-  if(playerRock >= 3){
-    computerInput = 'paper';
-
-    if(didComputerRealizePattern){
-      if (didComputerWin){
-        playerPaper = 0;
-        playerScissors = 0;
-      }
-      else if (!didComputerWin){
-        didComputerRealizePattern = false;
-        playerRock = 0;
-        playerPaper = 0;
-        playerScissors = 0;
-      }
-    }
-  }
-  else if(playerPaper >= 3){
-    computerInput = 'scissors';
-
-    if(didComputerRealizePattern){
-
-    if(didComputerWin){
-      playerRock = 0;
-      playerScissors = 0;
-    }
-    else if(!didComputerWin){
-      didComputerRealizePattern = false;
-      playerPaper = 0;
-      playerRock = 0;
-      playerScissors = 0;
-    }
-
-    }
-  }
-  else if(playerScissors >= 3){
-    computerInput = 'rock';
-
-    if(didComputerRealizePattern){
-      if(didComputerWin){
-        playerRock = 0;
-        playerPaper = 0;
-      }
-      else if(!didComputerWin){
-        didComputerRealizePattern = false;
-        playerScissors = 0;
-        playerRock = 0;
-        playerPaper = 0;
-      }
-    }
-  }
-
-  //game compares two inputs and decides who lost
+//checks who won
+function compareInputs(){
   if (playerInput == computerInput){
     alert("Computer choice: " + computerInput + ". It's a draw");
     draws++;
@@ -190,6 +149,37 @@ function playGame(){
     playerWins++;
     didComputerWin = false;
   }
+}
+
+//assigns computer input based on a random number (if there is no pattern)
+function assignRandomInput(){
+  var computerInputID = Math.floor(Math.random() * 3);
+  if (computerInputID == 0){
+    computerInput = 'rock';
+  }
+  else if(computerInputID == 1){
+    computerInput = 'paper';
+  }
+  else{
+    computerInput = 'scissors';
+  }
+}
+
+//computer thinks it found the pattern and checks if its valid
+function testThePattern(){
+  if(playerRock >= 3){
+    computerInput = 'paper';
+  }
+  else if(playerPaper >= 3){
+    computerInput = 'scissors';
+  }
+  else if(playerScissors >= 3){
+    computerInput = 'rock';
+  }
+}
+
+//computer checks if the pattern still works or if the player changed it
+function redefinePattern(){
   if(playerPaper >=3 || playerRock >= 3 || playerScissors >=3){
     if(didComputerWin){
       didComputerRealizePattern = true;
@@ -201,11 +191,6 @@ function playGame(){
       playerScissors = 0;
     }
   }
-  console.log("Did computer win: " + didComputerWin);
-  console.log("Player rock: " + playerRock);
-  console.log("Player paper: " + playerPaper);
-  console.log("Player scissors: " + playerScissors);
-  console.log("Computer realized the pattern:" + didComputerRealizePattern);
 }
 
 
