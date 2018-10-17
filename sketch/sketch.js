@@ -196,6 +196,9 @@ function playGame(){
       }
     else{
       didComputerRealizePattern = false;
+      playerPaper = 0;
+      playerRock = 0;
+      playerScissors = 0;
     }
   }
   console.log("Did computer win: " + didComputerWin);
